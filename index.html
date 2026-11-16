@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Critério: diagnóstico de maturidade de dados para startups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F6F8; --surface:#FFFFFF; --surface-2:#E7EEF2;
+  --ink:#10263A; --ink-2:#465B6C; --line:#D2DDE5;
+  --teal:#17726D; --teal-soft:#DCEEEC; --on-teal:#FFFFFF;
+  --amber:#D9961A; --amber-ink:#8A5A00; --amber-soft:#FBF0D9;
+  --panel:#10263A; --on-panel:#EAF1F5; --on-panel-2:#A9BCCB; --panel-line:#2A4358;
+  --danger:#B3261E;
+  --f-titulo:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-corpo:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0B1722; --surface:#12222F; --surface-2:#182D3D;
+    --ink:#E6EEF3; --ink-2:#A3B6C4; --line:#27404F;
+    --teal:#4CC2B8; --teal-soft:#143A3A; --on-teal:#062422;
+    --amber:#F0B545; --amber-ink:#F3C56A; --amber-soft:#3A2E12;
+    --panel:#173245; --on-panel:#EAF1F5; --on-panel-2:#A9BCCB; --panel-line:#2F5068;
+    --danger:#FF8A80;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B1722; --surface:#12222F; --surface-2:#182D3D;
+  --ink:#E6EEF3; --ink-2:#A3B6C4; --line:#27404F;
+  --teal:#4CC2B8; --teal-soft:#143A3A; --on-teal:#062422;
+  --amber:#F0B545; --amber-ink:#F3C56A; --amber-soft:#3A2E12;
+  --panel:#173245; --on-panel:#EAF1F5; --on-panel-2:#A9BCCB; --panel-line:#2F5068;
+  --danger:#FF8A80;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--f-corpo);}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+[hidden]{display:none !important}
+img,svg{max-width:100%}
+h1,h2,h3{font-family:var(--f-titulo);line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5.2vw,3.7rem);font-weight:700}
+h2{font-size:clamp(1.65rem,3.2vw,2.35rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:650;letter-spacing:-.01em;line-height:1.25}
+h1[tabindex="-1"]:focus{outline:none}
+p{margin:0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+.container{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,4vw,40px)}
+.lead{font-size:1.2rem;color:var(--ink-2);max-width:56ch}
+.muted{color:var(--ink-2)}
+.small{font-size:.92rem}
+
+/* Cabeçalho */
+.topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-top:4px solid var(--teal);border-bottom:1px solid var(--line)}
+.topo-in{display:flex;align-items:center;gap:24px;min-height:64px}
+.marca{display:flex;align-items:center;gap:10px;font:700 1.35rem/1 var(--f-titulo);letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.marca svg{width:26px;height:26px;flex:none}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{color:var(--ink-2);text-decoration:none;font-weight:500;font-size:.98rem}
+.nav a:hover{color:var(--ink)}
+.topo .btn{margin-left:8px}
+body[data-view="diagnostico"] .nav, body[data-view="relatorio"] .nav,
+body[data-view="diagnostico"] .topo .cta-topo, body[data-view="relatorio"] .topo .cta-topo{display:none}
+body[data-view="inicio"] .topo .voltar-topo{display:none}
+.voltar-topo{margin-left:auto}
+@media (max-width:860px){.nav{display:none}.topo .cta-topo{margin-left:auto}}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem/1.2 var(--f-corpo);padding:13px 20px;border-radius:10px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s}
+.btn-pri{background:var(--teal);color:var(--on-teal)}
+.btn-pri:hover{filter:brightness(1.08)}
+.btn-sec{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-sec:hover{background:var(--surface-2)}
+.btn-texto{background:none;border:none;padding:6px 2px;color:var(--teal);font:600 1rem var(--f-corpo);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.btn-peq{padding:9px 14px;font-size:.95rem}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+
+/* Seções da home */
+.sec{padding-block:clamp(56px,8vw,96px)}
+.sec + .sec{border-top:1px solid var(--line)}
+.sec-cab{max-width:62ch;margin-bottom:36px}
+.sec-cab p{margin-top:14px;color:var(--ink-2)}
+
+.hero{padding-block:clamp(40px,6vw,72px) clamp(56px,8vw,88px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero .lead{margin-top:22px}
+.hero-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:30px}
+.hero-nota{margin-top:16px;color:var(--ink-2);font-size:.95rem}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.demo-tit{font:650 1.05rem/1.3 var(--f-titulo)}
+.demo-sub{color:var(--ink-2);font-size:.9rem;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font:500 .88rem/1.2 var(--f-corpo);padding:7px 11px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.demo-pri{margin:6px 0 0;padding:14px 0 0;border-top:1px solid var(--line);font-size:.95rem}
+.demo-pri ol{margin:6px 0 0;padding-left:1.3em}
+.demo-pri li{margin:2px 0}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* Radar */
+.radar{display:block;width:100%;height:auto}
+.r-grade{fill:none;stroke:var(--line);stroke-width:1}
+.r-eixo{stroke:var(--line);stroke-width:1}
+.r-nec{fill:var(--amber);fill-opacity:.12;stroke:var(--amber);stroke-width:2;stroke-dasharray:6 4;stroke-linejoin:round}
+.r-hoje{fill:var(--teal);fill-opacity:.22;stroke:var(--teal);stroke-width:2.5;stroke-linejoin:round}
+.r-ponto{fill:var(--teal)}
+.r-rot{fill:var(--ink);font:600 14px var(--f-corpo)}
+.r-esc{fill:var(--ink-2);font:400 10px var(--f-corpo)}
+.legenda{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:.9rem;color:var(--ink-2);margin-top:4px}
+.legenda span{display:inline-flex;align-items:center;gap:8px}
+.leg-hoje,.leg-nec{width:22px;height:0;border-top:3px solid var(--teal);display:inline-block}
+.leg-nec{border-top:2px dashed var(--amber)}
+
+/* Problema (faixa escura) */
+.faixa{background:var(--panel);color:var(--on-panel)}
+.faixa.sec{border-top:none}
+.faixa + .sec{border-top:none}
+.faixa .muted, .faixa .sec-cab p{color:var(--on-panel-2)}
+.prob-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.prob-grid p{margin-top:16px;color:var(--on-panel-2);max-width:52ch}
+.lista-regua{list-style:none;margin:0;padding:0}
+.lista-regua li{padding:16px 0;border-top:1px solid var(--panel-line);font:600 1.12rem/1.35 var(--f-titulo)}
+.lista-regua li:last-child{border-bottom:1px solid var(--panel-line)}
+.lista-regua li span{display:block;font:400 .97rem/1.5 var(--f-corpo);color:var(--on-panel-2);margin-top:4px}
+@media (max-width:820px){.prob-grid{grid-template-columns:1fr}}
+
+/* Etapas */
+.etapas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.etapas li{padding:22px 28px 0 0;border-top:2px solid var(--ink);position:relative}
+.etapas li + li{padding-left:28px;border-left:1px solid var(--line)}
+.etapas .n{font:700 2.6rem/1 var(--f-titulo);color:var(--teal);letter-spacing:-.03em}
+.etapas h3{margin-top:12px}
+.etapas p{margin-top:8px;color:var(--ink-2)}
+.selo{display:inline-block;font-size:.8rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--amber-soft);color:var(--amber-ink);margin-left:8px;vertical-align:middle}
+@media (max-width:820px){.etapas{grid-template-columns:1fr}.etapas li, .etapas li + li{padding:20px 0 24px;border-left:none}}
+
+/* Eixos e benefícios: listas de definição */
+.defs{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,72px)}
+.defs > div{padding:18px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,11.5rem) minmax(0,1fr);gap:8px 20px}
+.defs dt{font:650 1.05rem/1.3 var(--f-titulo)}
+.defs dd{margin:0;color:var(--ink-2)}
+.defs.uma{grid-template-columns:1fr}
+.defs.uma > div{grid-template-columns:minmax(0,17rem) minmax(0,1fr)}
+@media (max-width:820px){.defs{grid-template-columns:1fr}.defs > div, .defs.uma > div{grid-template-columns:1fr}}
+
+/* Para quem */
+.duas{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.quem h3{margin-bottom:12px}
+.quem ul{list-style:none;margin:0;padding:0}
+.quem li{position:relative;padding:10px 0 10px 32px;border-top:1px solid var(--line)}
+.quem li::before{content:"";position:absolute;left:2px;top:16px;width:14px;height:8px;border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg)}
+.quem.nao li::before{width:14px;height:0;border-left:none;border-bottom:2.5px solid var(--ink-2);transform:none;top:22px}
+.quem.nao{color:var(--ink-2)}
+.quem.nao h3{color:var(--ink)}
+@media (max-width:820px){.duas{grid-template-columns:1fr}}
+
+/* Planos */
+.planos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.plano{border-radius:18px;padding:30px;display:flex;flex-direction:column;background:var(--surface);border:1.5px solid var(--teal)}
+.plano.completo{background:var(--panel);color:var(--on-panel);border-color:var(--panel)}
+.plano .preco{font:700 2rem/1.1 var(--f-titulo);margin-top:14px;letter-spacing:-.02em}
+.plano .preco small{display:block;font:400 .95rem/1.4 var(--f-corpo);color:var(--ink-2);letter-spacing:0;margin-top:6px}
+.plano.completo .preco small{color:var(--on-panel-2)}
+.plano ul{list-style:none;margin:22px 0 26px;padding:0;flex:1}
+.plano li{padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line)}
+.plano.completo li{border-color:var(--panel-line)}
+.plano li::before{content:"";position:absolute;left:2px;top:17px;width:11px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);opacity:.75}
+.plano.completo .btn{background:transparent;border-color:var(--on-panel-2);color:var(--on-panel)}
+.plano.completo .selo{margin-left:10px}
+.servicos{margin-top:20px;color:var(--ink-2);max-width:70ch}
+@media (max-width:820px){.planos{grid-template-columns:1fr}}
+
+/* Base */
+.refs{list-style:none;margin:0;padding:0;max-width:78ch}
+.refs li{padding:14px 0;border-top:1px solid var(--line);color:var(--ink-2)}
+.refs li strong{color:var(--ink);font-weight:600}
+
+.rodape{border-top:1px solid var(--line);padding-block:32px 44px;color:var(--ink-2);font-size:.93rem}
+.rodape p + p{margin-top:6px}
+
+/* Formulário */
+.form-wrap{max-width:760px;margin-inline:auto;padding-block:clamp(28px,5vw,56px) 80px}
+.progresso{display:flex;align-items:center;gap:14px;font-size:.95rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.barra{flex:1;height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.barra i{display:block;height:100%;background:var(--teal);border-radius:99px;transition:width .25s}
+.form-wrap h1{font-size:clamp(1.8rem,4vw,2.5rem);margin-top:22px}
+.form-wrap .lead{font-size:1.08rem;margin-top:10px}
+fieldset{border:none;margin:34px 0 0;padding:0;min-width:0}
+legend, .rotulo{font:650 1.12rem/1.35 var(--f-titulo);padding:0;margin-bottom:12px;display:block}
+legend small, .rotulo small{font:400 .9rem var(--f-corpo);color:var(--ink-2);margin-left:6px}
+.opcoes{display:grid;gap:8px}
+.opcao{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;line-height:1.45}
+.opcao:hover{border-color:var(--ink-2)}
+.opcao input{position:absolute;opacity:0;pointer-events:none}
+.opcao .bola{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink-2);margin-top:3px;background:var(--surface)}
+.opcao:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.opcao:has(input:checked) .bola{border-color:var(--teal);box-shadow:inset 0 0 0 3.5px var(--teal-soft);background:var(--teal)}
+.opcao:has(input:focus-visible){outline:2px solid var(--teal);outline-offset:2px}
+.campo-texto{width:100%;font:400 1.05rem var(--f-corpo);padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.faltando legend{color:var(--danger)}
+.faltando .opcao{border-color:var(--danger)}
+.aviso{color:var(--danger);font-weight:600;margin-top:22px;min-height:1.6em}
+.form-acoes{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+
+/* Relatório */
+.rel-wrap{max-width:980px;margin-inline:auto;padding-block:clamp(28px,5vw,56px) 80px}
+.rel-topo{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;padding-bottom:24px;border-bottom:2px solid var(--ink)}
+.rel-topo h1{font-size:clamp(1.9rem,4.4vw,2.9rem)}
+.rel-topo .sub{color:var(--ink-2);margin-top:8px}
+.rel-acoes{display:flex;gap:10px;flex-wrap:wrap}
+.ficha{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;border-bottom:1px solid var(--line)}
+.ficha div{padding:16px 16px 16px 0}
+.ficha dt{font-size:.85rem;color:var(--ink-2)}
+.ficha dd{margin:2px 0 0;font-weight:600}
+@media (max-width:760px){.ficha{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.numeros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:30px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.numeros > div{padding:22px 24px}
+.numeros > div + div{border-left:1px solid var(--line)}
+.numeros .rot{font-size:.9rem;color:var(--ink-2)}
+.numeros .val{font:700 2.3rem/1.1 var(--f-titulo);letter-spacing:-.03em;margin-top:6px;font-variant-numeric:tabular-nums}
+.numeros .val small{font:500 1rem var(--f-corpo);color:var(--ink-2);letter-spacing:0}
+.numeros .obs{font-size:.92rem;color:var(--ink-2);margin-top:6px}
+@media (max-width:760px){.numeros{grid-template-columns:1fr}.numeros > div + div{border-left:none;border-top:1px solid var(--line)}}
+.bloco{margin-top:48px}
+.bloco > h2{font-size:clamp(1.4rem,2.6vw,1.8rem);margin-bottom:16px}
+.bloco > p{max-width:74ch}
+.bloco > p + p{margin-top:12px}
+.radar-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,4vw,44px);align-items:center}
+@media (max-width:820px){.radar-grid{grid-template-columns:1fr}}
+.rolagem{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:11px 10px 11px 0;border-bottom:1px solid var(--line)}
+thead th{font-size:.85rem;font-weight:500;color:var(--ink-2)}
+tbody th{font-weight:600}
+td.num, th.num{text-align:right;padding-right:0;padding-left:10px}
+td.falta{color:var(--amber-ink);font-weight:700}
+td.ok{color:var(--teal);font-weight:600}
+.prioridades{list-style:none;margin:0;padding:0}
+.prioridade{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px 12px;padding:26px 0;border-top:1px solid var(--line)}
+.prioridade:first-child{border-top:2px solid var(--ink)}
+.p-num{font:700 3rem/1 var(--f-titulo);color:var(--teal);letter-spacing:-.04em}
+.p-notas{color:var(--ink-2);margin-top:4px;font-variant-numeric:tabular-nums}
+.p-notas b{color:var(--amber-ink)}
+.prioridade p.porque{margin-top:12px;max-width:70ch}
+.p-sub{font:650 .98rem var(--f-titulo);margin-top:16px}
+.prioridade ul{margin:6px 0 0;padding-left:1.15em;max-width:70ch;list-style:disc}
+.prioridade li{margin:5px 0}
+.prioridade ul.pesou{list-style:none;padding-left:0;color:var(--ink-2)}
+.prioridade ul.pesou li strong{color:var(--ink);font-weight:600}
+@media (max-width:600px){.prioridade{grid-template-columns:1fr}.p-num{font-size:2.2rem}}
+.caixa{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;max-width:none}
+.caixa h3{margin-bottom:8px}
+.caixa p + p{margin-top:10px}
+.caixa .small{color:var(--ink-2)}
+details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font:650 1.1rem var(--f-titulo)}
+details p{margin-top:12px;color:var(--ink-2);max-width:74ch}
+.final{background:var(--panel);color:var(--on-panel);border-radius:18px;padding:30px;margin-top:48px}
+.final p{color:var(--on-panel-2);margin-top:10px;max-width:66ch}
+.final .selo{margin-left:0;margin-bottom:12px}
+.vazio{text-align:center;padding:80px 0}
+.vazio p{color:var(--ink-2);margin:12px auto 24px;max-width:46ch}
+.msg{color:var(--ink-2);font-size:.92rem;min-height:1.4em;margin-top:8px}
+.exportado .so-tela{display:none !important}
+.exportado{padding:32px 0}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;scroll-behavior:auto !important}}
+@media print{.topo,.so-tela{display:none !important}body{background:#fff}}
+</style>
+</head>
+<body data-view="inicio">
+
+<header class="topo">
+  <div class="container topo-in">
+    <a class="marca" href="#inicio" aria-label="Critério, página inicial">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><polygon points="13,1.5 23,7.2 23,18.8 13,24.5 3,18.8 3,7.2" fill="none" stroke="currentColor" stroke-width="1.6"/><polygon points="13,6 19,10 17.5,18 13,19.5 7,16.5 8.5,9" fill="var(--teal)"/></svg>
+      Critério
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#planos">Planos</a>
+    </nav>
+    <a class="btn btn-pri btn-peq cta-topo" href="#diagnostico">Fazer o diagnóstico</a>
+    <a class="btn-texto voltar-topo" href="#inicio">Voltar ao início</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== INÍCIO ===================== -->
+<div id="v-inicio">
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1 tabindex="-1" id="t-inicio">A tecnologia está disponível. Difícil é decidir onde investir primeiro.</h1>
+        <p class="lead">O diagnóstico mostra onde a gestão de dados da sua startup está hoje, o que o seu objetivo exige e quais três frentes encurtam a distância entre os dois.</p>
+        <div class="hero-acoes">
+          <a class="btn btn-pri" href="#diagnostico">Fazer o diagnóstico inicial</a>
+          <a class="btn-texto" href="#como-funciona">Ver como funciona</a>
+        </div>
+        <p class="hero-nota">Gratuito, cerca de 8 minutos. São 23 perguntas de múltipla escolha e as respostas ficam neste navegador.</p>
+      </div>
+
+      <div class="demo" aria-label="Demonstração do relatório">
+        <p class="demo-tit">Mude o objetivo e veja o que o relatório passa a priorizar</p>
+        <p class="demo-sub">Exemplo ilustrativo: a mesma startup em tração, com 12 pessoas.</p>
+        <div class="chips" id="demo-chips" role="group" aria-label="Objetivo da startup de exemplo"></div>
+        <div id="demo-radar"></div>
+        <div class="legenda"><span><i class="leg-hoje"></i>Hoje</span><span><i class="leg-nec"></i>Necessário para o objetivo</span></div>
+        <div class="demo-pri" aria-live="polite"><strong>Prioridades para este objetivo</strong><ol id="demo-lista"></ol></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec faixa" id="problema">
+    <div class="container prob-grid">
+      <div>
+        <h2>Decidir sobre tecnologia custa tempo, dinheiro e atenção</h2>
+        <p>Ferramentas, perfis profissionais e arquiteturas se multiplicam, e nenhuma equipe consegue avaliar todas as alternativas. Em uma startup, essa escolha é feita com informação incompleta e recursos escassos, quase sempre por quem também cuida do produto e das vendas.</p>
+        <p>O custo aparece depois, na forma de decisões que precisam ser refeitas.</p>
+      </div>
+      <ul class="lista-regua">
+        <li>Ferramentas contratadas que ninguém usa<span>O investimento foi feito antes de existir o dado ou o processo que a ferramenta exige.</span></li>
+        <li>Contratações com o perfil errado<span>Um especialista em modelos chega a uma empresa que ainda precisa organizar as planilhas.</span></li>
+        <li>Retrabalho para trocar o que foi implantado<span>Cada área resolve do seu jeito e as soluções não se conversam.</span></li>
+        <li>Projetos de IA que não saem do piloto<span>Falta a base: dados registrados, reunidos e confiáveis.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="como-funciona">
+    <div class="container">
+      <div class="sec-cab">
+        <h2>Do diagnóstico às prioridades em três etapas</h2>
+        <p>Uma jornada modular. A startup avança até onde fizer sentido para o momento e para o orçamento.</p>
+      </div>
+      <ol class="etapas">
+        <li><div class="n">1</div><h3>Diagnosticar</h3><p>Você informa o objetivo da startup para os próximos 12 meses e responde perguntas sobre seis eixos da gestão de dados.</p></li>
+        <li><div class="n">2</div><h3>Priorizar</h3><p>O relatório compara a situação atual com o que o objetivo exige e aponta três frentes, com justificativa e primeiros passos.</p></li>
+        <li><div class="n">3</div><h3>Evoluir <span class="selo">Em breve</span></h3><p>No diagnóstico completo, a análise é aprofundada com as fontes de dados reais e vira um plano de 90 dias, com acompanhamento opcional.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="eixos">
+    <div class="container">
+      <div class="sec-cab">
+        <h2>Seis eixos para descrever a gestão de dados</h2>
+        <p>Cada eixo recebe uma nota de 0 a 100, calculada a partir de práticas observáveis, e é comparado com o patamar que o objetivo da startup pede.</p>
+      </div>
+      <dl class="defs" id="lista-eixos"></dl>
+    </div>
+  </section>
+
+  <section class="sec" id="para-quem">
+    <div class="container">
+      <div class="sec-cab"><h2>Para quem o diagnóstico foi pensado</h2></div>
+      <div class="duas">
+        <div class="quem">
+          <h3>Faz sentido se a startup</h3>
+          <ul>
+            <li>já vende, está em operação ou tração e tem entre 5 e 50 pessoas;</li>
+            <li>não tem uma equipe dedicada a dados;</li>
+            <li>está prestes a decidir um investimento: uma contratação, uma ferramenta, uma consultoria ou um projeto de IA;</li>
+            <li>tem os números, mas eles demoram a aparecer quando alguém precisa.</li>
+          </ul>
+        </div>
+        <div class="quem nao">
+          <h3>Ainda não é o momento se</h3>
+          <ul>
+            <li>o negócio está na fase de ideia, sem operação que gere dados;</li>
+            <li>já existe uma equipe de dados com roteiro próprio. Nesse caso o diagnóstico inicial tende a trazer pouca novidade.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="beneficios">
+    <div class="container">
+      <div class="sec-cab"><h2>O que a startup leva do diagnóstico</h2></div>
+      <dl class="defs uma">
+        <div><dt>Um retrato em seis eixos</dt><dd>Uma linguagem comum para sócios e equipe técnica discutirem onde a startup está, sem depender de jargão.</dd></div>
+        <div><dt>Três prioridades com justificativa</dt><dd>As frentes são ordenadas pela distância até o objetivo, com a razão de cada uma e os primeiros passos.</dd></div>
+        <div><dt>Investimentos na ordem certa</dt><dd>A base antes do painel e o painel antes da IA. Menos retrabalho e menos ferramenta parada.</dd></div>
+        <div><dt>Clareza sobre quem executa</dt><dd>Uma indicação de quando resolver com a equipe, quando contratar e quando buscar apoio externo.</dd></div>
+        <div><dt>O custo do trabalho manual</dt><dd>Uma estimativa das horas que a equipe gasta por mês copiando, colando e conferindo dados.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="planos">
+    <div class="container">
+      <div class="sec-cab">
+        <h2>Comece pelo diagnóstico inicial</h2>
+        <p>O relatório inicial é entregue inteiro, com os seis eixos. A versão completa acrescenta profundidade, não desbloqueia o que ficou escondido.</p>
+      </div>
+      <div class="planos">
+        <div class="plano">
+          <h3>Diagnóstico inicial</h3>
+          <p class="preco">Gratuito<small>Autodiagnóstico, cerca de 8 minutos</small></p>
+          <ul>
+            <li>Nota de 0 a 100 em seis eixos</li>
+            <li>Radar comparando a situação atual com o que o objetivo exige</li>
+            <li>Três prioridades com justificativa e primeiros passos</li>
+            <li>Leitura da decisão de tecnologia em avaliação</li>
+            <li>Estimativa do trabalho manual com dados</li>
+          </ul>
+          <a class="btn btn-pri" href="#diagnostico">Fazer o diagnóstico inicial</a>
+        </div>
+        <div class="plano completo">
+          <h3>Diagnóstico completo <span class="selo">Em breve</span></h3>
+          <p class="preco">Valor em definição<small>Análise assistida por especialistas, pagamento único</small></p>
+          <ul>
+            <li>Tudo do diagnóstico inicial</li>
+            <li>Entrevista com sócios e responsáveis técnicos</li>
+            <li>Análise das fontes de dados e das ferramentas em uso</li>
+            <li>Plano de 90 dias com responsáveis e resultado esperado</li>
+            <li>Recomendação de ferramentas e perfis profissionais</li>
+          </ul>
+          <button class="btn" type="button" disabled>Disponível em breve</button>
+        </div>
+      </div>
+      <p class="servicos">Depois do diagnóstico completo, a startup poderá contratar acompanhamento periódico, com execução pela própria equipe, ou a implementação das iniciativas por uma equipe externa.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="base">
+    <div class="container">
+      <div class="sec-cab">
+        <h2>Em que o método se apoia</h2>
+        <p>A proposta parte de um problema econômico: escolher e coordenar investimentos em tecnologia tem custo, e esse custo pesa mais em empresas pequenas.</p>
+      </div>
+      <ul class="refs">
+        <li><strong>Economia dos custos de transação.</strong> Racionalidade limitada, custos de buscar e avaliar alternativas e a escolha entre executar internamente ou contratar. Williamson, O. E. (1981), “The Economics of Organization: The Transaction Cost Approach”.</li>
+        <li><strong>Ciclo de vida da engenharia de dados.</strong> Geração, ingestão, armazenamento, transformação e entrega, com os fundamentos de segurança, gestão e orquestração. Reis, J. e Housley, M., “Fundamentos de Engenharia de Dados” (2023).</li>
+        <li><strong>Hierarquia de necessidades de dados.</strong> Coletar, mover, explorar e agregar vêm antes de otimizar e de aplicar IA. Rogati, M. (2017), “The AI Hierarchy of Needs”.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>Projeto acadêmico da disciplina Ecossistemas de Inovação e Empreendedorismo, Mestrado em Economia da UDESC. Gabriela Pereira Sotéro e Cassiano Gabriel Jaques.</p>
+      <p>Versão de teste para validação da proposta. O serviço não está disponível comercialmente.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== DIAGNÓSTICO ===================== -->
+<div id="v-diagnostico" hidden>
+  <div class="container form-wrap">
+    <div class="progresso"><span id="prog-txt"></span><div class="barra" aria-hidden="true"><i id="prog-barra"></i></div></div>
+    <h1 tabindex="-1" id="t-diagnostico"></h1>
+    <p class="lead" id="etapa-desc"></p>
+    <div id="etapa-campos"></div>
+    <p class="aviso" id="form-aviso" role="alert"></p>
+    <div class="form-acoes">
+      <button class="btn btn-sec" type="button" id="btn-voltar">Voltar</button>
+      <button class="btn-texto" type="button" id="btn-limpar" hidden>Limpar respostas</button>
+      <button class="btn btn-pri" type="button" id="btn-avancar">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RELATÓRIO ===================== -->
+<div id="v-relatorio" hidden>
+  <div class="container rel-wrap">
+    <article class="relatorio" id="relatorio-conteudo"></article>
+  </div>
+</div>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+
+var $ = function(s, r){ return (r || document).querySelector(s); };
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+/* ---------------------------------------------------------------
+   Conteúdo do diagnóstico
+   --------------------------------------------------------------- */
+var EIXOS = [
+  { id:"est", nome:"Estratégia e gestão", rot:["Estratégia","e gestão"],
+    desc:"Como a startup decide, planeja e avalia investimentos em tecnologia e dados.",
+    perguntas:[
+      { id:"est1", rotulo:"Decisão de investimento",
+        texto:"Como a startup decide em quais tecnologias, ferramentas ou competências investir?",
+        opcoes:["Conforme os problemas aparecem, sem critério definido","Os sócios decidem pela experiência, caso a caso","Comparamos alternativas com critérios (custo, retorno, esforço) antes de decidir","Seguimos um roteiro revisado periodicamente e ligado às metas do negócio"],
+        acoes:["Definam três critérios fixos para qualquer investimento em tecnologia (custo total, resultado esperado e esforço de implantação) e registrem a comparação de pelo menos duas alternativas.","Reúnam as decisões já tomadas em um roteiro de 6 a 12 meses, com cada item ligado a uma meta do negócio."] },
+      { id:"est2", rotulo:"Planejamento do trabalho",
+        texto:"Como o trabalho de tecnologia e dados é planejado e acompanhado?",
+        opcoes:["Por urgência, sem planejamento","Com uma lista de tarefas, sem revisão regular","Em ciclos de planejamento (sprints ou similar), com prioridades definidas","Em ciclos curtos, com revisão de resultados e ajuste das prioridades"],
+        acoes:["Adotem um ciclo quinzenal simples: uma lista única de prioridades, um responsável por item e 30 minutos de revisão ao final.","Incluam na revisão de cada ciclo a pergunta sobre resultado: o que foi entregue mudou algum indicador?"] },
+      { id:"est3", rotulo:"Verificação de resultado",
+        texto:"Depois de um investimento em tecnologia, a startup verifica se ele trouxe o resultado esperado?",
+        opcoes:["Não verificamos","De modo informal, por percepção","Em alguns casos, comparando com o que era esperado","Sempre: o resultado esperado é definido antes e medido depois"],
+        acoes:["Para o próximo investimento, escrevam antes o resultado esperado em uma frase com número e prazo, e marquem a data da verificação.","Tornem a verificação um padrão: todo investimento acima de um valor definido tem resultado esperado e data de revisão."] }
+    ]},
+  { id:"col", nome:"Coleta e infraestrutura", rot:["Coleta e","infraestrutura"],
+    desc:"O que é registrado, onde fica guardado e como circula entre as ferramentas.",
+    perguntas:[
+      { id:"col1", rotulo:"Registro dos dados",
+        texto:"Os dados essenciais do negócio (clientes, vendas, uso do produto, finanças) são registrados?",
+        opcoes:["Boa parte não é registrada ou depende da memória das pessoas","São registrados, mas com lacunas e de formas diferentes","São registrados de forma consistente nas principais áreas","São registrados de forma consistente, com histórico e eventos de uso do produto"],
+        acoes:["Listem os dados que o objetivo exige (por exemplo: origem do cliente, data da venda, valor, cancelamento) e definam onde e por quem cada um é registrado.","Passem a registrar eventos de uso do produto e mantenham o histórico, em vez de sobrescrever os valores."] },
+      { id:"col2", rotulo:"Armazenamento",
+        texto:"Onde esses dados ficam armazenados?",
+        opcoes:["Espalhados em planilhas pessoais, e-mails e mensagens","Em ferramentas separadas (CRM, financeiro, planilhas) que não se conversam","Em ferramentas separadas, com parte dos dados reunida em um local comum","Reunidos em um repositório central (banco de dados ou data warehouse)"],
+        acoes:["Escolham um local único para os dados principais. Nesta fase, uma planilha central bem estruturada ou o banco do próprio produto já resolve.","Levem os dados das ferramentas restantes para o repositório comum, começando pela fonte mais consultada."] },
+      { id:"col3", rotulo:"Integração entre ferramentas",
+        texto:"Como os dados passam de uma ferramenta para outra?",
+        opcoes:["Não passam; cada ferramenta guarda os seus","À mão: exportar, copiar e colar","Com algumas integrações automáticas e outras manuais","Com integrações automáticas e monitoradas nos fluxos principais"],
+        acoes:["Mapeiem os dois fluxos manuais mais frequentes e integrem primeiro esses, com os conectores nativos das ferramentas ou uma plataforma de automação.","Substituam as integrações manuais restantes e registrem cada fluxo: origem, destino, frequência e responsável."] }
+    ]},
+  { id:"qua", nome:"Qualidade e governança", rot:["Qualidade e","governança"],
+    desc:"Confiança nos números, definições comuns e controle de acesso.",
+    perguntas:[
+      { id:"qua1", rotulo:"Confiança nos números",
+        texto:"Quanto a equipe confia nos números que usa?",
+        opcoes:["É comum encontrar números diferentes para a mesma coisa","Confiamos em parte e conferimos à mão antes de usar","Confiamos nos principais números; erros são exceção","Há verificações automáticas e os erros são identificados antes de chegar a quem decide"],
+        acoes:["Escolham os cinco números mais usados e reconciliem cada um com a fonte original, registrando as diferenças encontradas e a causa.","Criem verificações automáticas simples (totais que precisam bater, campos obrigatórios) nos dados que alimentam as decisões."] },
+      { id:"qua2", rotulo:"Definição dos indicadores",
+        texto:"Os principais indicadores têm definição única (por exemplo, o que conta como “cliente ativo”)?",
+        opcoes:["Não há definições; cada pessoa calcula de um jeito","Há um entendimento informal, não documentado","Os principais indicadores têm definição documentada","As definições são documentadas, têm responsável e são usadas por todas as áreas"],
+        acoes:["Escrevam em uma página a definição, a fórmula e a fonte de cada indicador principal, e validem com os sócios.","Nomeiem um responsável por indicador e adotem o documento de definições em todas as áreas."] },
+      { id:"qua3", rotulo:"Acesso e dados pessoais",
+        texto:"Como é controlado o acesso a dados sensíveis (clientes, finanças) e o tratamento de dados pessoais exigido pela LGPD?",
+        opcoes:["Não há controle; quem precisa, acessa","Há um controle informal, sem regras escritas","O acesso é definido por perfil nas principais ferramentas","O acesso é por perfil, com regras escritas e dados pessoais mapeados"],
+        acoes:["Revisem quem acessa as ferramentas com dados de clientes e finanças e removam os acessos que não são mais necessários.","Mapeiem quais dados pessoais são coletados, para que servem e onde ficam. É a base de qualquer adequação à LGPD."] }
+    ]},
+  { id:"aut", nome:"Automação e processos", rot:["Automação","e processos"],
+    desc:"Quanto do trabalho com dados ainda é manual e como as rotinas são mantidas.",
+    perguntas:[
+      { id:"aut1", rotulo:"Relatórios recorrentes",
+        texto:"Como são produzidos os relatórios recorrentes (semanais, mensais, para investidores)?",
+        opcoes:["Não produzimos relatórios recorrentes","São montados à mão a cada vez","Estão parcialmente automatizados e ainda pedem ajustes manuais","São atualizados automaticamente"],
+        acoes:["Definam um relatório mensal mínimo, com os indicadores do objetivo, e montem a primeira versão já ligada à fonte dos dados.","Escolham o relatório mais frequente e automatizem a atualização dele, ligando o painel diretamente à fonte dos dados.","Eliminem os ajustes manuais restantes. Cada ajuste costuma indicar um problema na origem do dado."] },
+      { id:"aut2", rotulo:"Tarefas repetitivas",
+        texto:"As tarefas operacionais repetitivas (cobranças, onboarding, atualização de cadastros, comunicações) são automatizadas?",
+        opcoes:["Tudo é feito à mão","Há uma ou outra automação isolada","As principais rotinas são automatizadas","As rotinas são automatizadas, monitoradas e documentadas"],
+        acoes:["Listem as tarefas repetitivas com tempo e frequência e automatizem primeiro a que soma mais horas por mês.","Documentem cada automação (o que faz, o que a dispara, quem responde por ela) para reduzir a dependência de quem a criou."] },
+      { id:"aut3", rotulo:"Detecção de falhas",
+        texto:"Quando uma automação ou integração falha, como a equipe fica sabendo?",
+        opcoes:["Não temos automações ou integrações","Só quando alguém nota o erro no resultado","Alguém confere de tempos em tempos","Há alertas automáticos"],
+        acoes:["Ao criar as primeiras automações, configurem desde o início um aviso de falha por e-mail ou mensagem.","Configurem um aviso de falha nas automações existentes. A maioria das ferramentas oferece isso sem custo adicional.","Troquem a conferência periódica por alertas automáticos nos fluxos que alimentam decisões ou chegam ao cliente."] }
+    ]},
+  { id:"ana", nome:"Análise e decisão", rot:["Análise","e decisão"],
+    desc:"Como os dados chegam a quem decide e que perguntas conseguem responder.",
+    perguntas:[
+      { id:"ana1", rotulo:"Acompanhamento de indicadores",
+        texto:"Como os indicadores do negócio são acompanhados?",
+        opcoes:["Não acompanhamos indicadores","Em planilhas, consultadas quando surge uma dúvida","Em painéis atualizados e consultados com regularidade","Em painéis usados em rituais de decisão, com metas e alertas"],
+        acoes:["Definam de cinco a sete indicadores ligados ao objetivo e reúnam todos em um único painel, revisado toda semana.","Levem o painel para um ritual fixo de decisão e definam meta e responsável para cada indicador."] },
+      { id:"ana2", rotulo:"Tempo de resposta",
+        texto:"Quando surge uma pergunta de negócio (por exemplo, “por que as vendas caíram?”), quanto tempo leva para respondê-la com dados?",
+        opcoes:["Em geral não conseguimos responder com dados","Dias ou semanas, com bastante esforço manual","Algumas horas","Minutos; a informação já está disponível para quem precisa"],
+        acoes:["Anotem as perguntas que mais se repetem e preparem os dados para respondê-las. As cinco primeiras costumam cobrir a maior parte da demanda.","Deem acesso direto aos painéis e às bases para quem decide, para que a resposta não dependa de um pedido a outra pessoa."] },
+      { id:"ana3", rotulo:"Tipo de análise",
+        texto:"Que tipo de análise a startup faz hoje?",
+        opcoes:["Nenhuma análise estruturada","Descritiva: o que aconteceu (totais, médias, evolução)","Diagnóstica: por que aconteceu (segmentações, coortes, funis)","Preditiva ou experimental: previsões, testes A/B, modelos"],
+        acoes:["Comecem pela análise descritiva dos dados que já existem: evolução mensal de clientes, receita e cancelamentos.","Avancem para o porquê: segmentem os resultados por tipo de cliente, canal e período de entrada (coortes).","Testem uma hipótese por vez com experimentos simples (teste A/B) antes de investir em modelos preditivos."] }
+    ]},
+  { id:"pes", nome:"Pessoas e competências", rot:["Pessoas e","competências"],
+    desc:"Quem cuida dos dados e quanto a startup depende de pessoas específicas.",
+    perguntas:[
+      { id:"pes1", rotulo:"Responsável pelos dados",
+        texto:"Quem cuida dos dados na startup?",
+        opcoes:["Ninguém em específico","Alguém acumula essa função com outras, sem formação na área","Uma pessoa com conhecimento técnico dedica parte relevante do tempo","Uma pessoa ou equipe dedicada a dados"],
+        acoes:["Nomeiem um responsável pelos dados, mesmo em tempo parcial, com horas reservadas na semana para isso.","Avaliem se o volume de demandas já justifica dedicação integral ou um apoio externo recorrente."] },
+      { id:"pes2", rotulo:"Autonomia da equipe",
+        texto:"Qual é a autonomia da equipe para trabalhar com dados?",
+        opcoes:["Dependemos de terceiros até para análises simples","Fazemos análises simples em planilhas","Parte da equipe consulta bases e cria painéis por conta própria (SQL, BI)","A equipe constrói e mantém integrações, modelos de dados e automações"],
+        acoes:["Capacitem ao menos duas pessoas em análise com planilhas e em uma ferramenta de painéis. Cursos curtos já cobrem o necessário.","Desenvolvam em uma pessoa a competência de integração e modelagem de dados, ou contratem esse perfil em tempo parcial."] },
+      { id:"pes3", rotulo:"Dependência de uma pessoa",
+        texto:"Se a pessoa que mais entende dos dados saísse amanhã, o que aconteceria?",
+        opcoes:["Perderíamos a capacidade de gerar os números do negócio","Haveria uma parada relevante até alguém aprender","Outra pessoa assumiria, com alguma dificuldade","Pouco mudaria: o conhecimento está documentado e distribuído"],
+        acoes:["Documentem as três rotinas de dados mais críticas (passo a passo, acessos e fontes) e treinem uma segunda pessoa em cada uma.","Façam um rodízio: a segunda pessoa executa cada rotina crítica ao menos uma vez por trimestre."] }
+    ]}
+];
+
+var CONTEXTO = {
+  nome:{ tipo:"texto", opcional:true, texto:"Qual é o nome da startup?", dica:"opcional, usado apenas no título do relatório" },
+  estagio:{ texto:"Em que estágio a startup está?",
+    opcoes:[["val","Ideação ou validação: produto em construção ou em teste com os primeiros usuários"],["ope","Operação: produto no mercado, com as primeiras vendas"],["tra","Tração: vendas recorrentes e foco em crescer a base de clientes"],["esc","Escala: crescimento acelerado, com processos estruturados"]] },
+  equipe:{ texto:"Quantas pessoas trabalham na startup, contando os sócios?",
+    opcoes:[["p","De 1 a 5 pessoas"],["m","De 6 a 20 pessoas"],["g","De 21 a 50 pessoas"],["gg","Mais de 50 pessoas"]] },
+  objetivo:{ texto:"Qual é o principal objetivo da startup para os próximos 12 meses?", dica:"escolha o que mais pesa hoje",
+    opcoes:[["inv","Captar investimento"],["ven","Aumentar vendas e reter clientes"],["esc","Escalar a operação sem crescer a equipe na mesma proporção"],["efi","Reduzir custos e ganhar eficiência"],["ia","Lançar produto ou funcionalidade com dados ou IA"],["ges","Organizar a gestão e ganhar previsibilidade"]] },
+  decisao:{ texto:"Há alguma decisão de tecnologia ou dados em avaliação neste momento?",
+    opcoes:[["pessoa","Contratar uma pessoa de dados ou tecnologia"],["ferramenta","Contratar ou trocar uma ferramenta (CRM, BI, ERP, automação)"],["consultoria","Contratar uma consultoria ou agência"],["ia","Implementar IA ou automações"],["infra","Estruturar a infraestrutura de dados (banco, integrações)"],["nenhuma","Nenhuma decisão em vista"]] },
+  horas:{ texto:"Somando toda a equipe, quantas horas por semana são gastas consolidando dados à mão (copiar, colar, conferir, montar planilhas e relatórios)?",
+    opcoes:[["lt2","Menos de 2 horas"],["2a5","De 2 a 5 horas"],["6a10","De 6 a 10 horas"],["11a20","De 11 a 20 horas"],["gt20","Mais de 20 horas"],["ns","Não sei estimar"]] }
+};
+
+var ROT_ESTAGIO = {val:"Ideação ou validação", ope:"Operação", tra:"Tração", esc:"Escala"};
+var ROT_EQUIPE = {p:"1 a 5 pessoas", m:"6 a 20 pessoas", g:"21 a 50 pessoas", gg:"Mais de 50 pessoas"};
+var ROT_DEMO = {inv:"Captar investimento", ven:"Vender e reter", esc:"Escalar", efi:"Reduzir custos", ia:"Produto com IA", ges:"Organizar a gestão"};
+var ROT_OBJ = {inv:"Captar investimento", ven:"Aumentar vendas e reter clientes", esc:"Escalar a operação", efi:"Reduzir custos e ganhar eficiência", ia:"Lançar produto com dados ou IA", ges:"Organizar a gestão"};
+var FRASE_OBJ = {inv:"captar investimento", ven:"aumentar vendas e reter clientes", esc:"escalar a operação sem crescer a equipe na mesma proporção", efi:"reduzir custos e ganhar eficiência", ia:"lançar produto ou funcionalidade com dados ou IA", ges:"organizar a gestão e ganhar previsibilidade"};
+var HORAS = {
+  lt2:{val:"Menos de 9 h", obs:"por mês, cerca de um dia de trabalho ou menos"},
+  "2a5":{val:"9 a 22 h", obs:"por mês, o equivalente a 1 a 3 dias de trabalho"},
+  "6a10":{val:"26 a 43 h", obs:"por mês, o equivalente a 3 a 5 dias de trabalho"},
+  "11a20":{val:"48 a 87 h", obs:"por mês, o equivalente a 6 a 11 dias de trabalho"},
+  gt20:{val:"Mais de 87 h", obs:"por mês, mais de 11 dias de trabalho"},
+  ns:{val:"Não estimado", obs:"Medir essas horas por duas semanas já é um bom primeiro passo."}
+};
+
+/* Patamar necessário por objetivo (ordem: est, col, qua, aut, ana, pes).
+   Parâmetro inicial do MVP, a calibrar com entrevistas e primeiros diagnósticos. */
+var PERFIL = {
+  inv:[70,65,80,50,80,55],
+  ven:[60,75,65,55,80,55],
+  esc:[65,75,65,85,60,65],
+  efi:[65,65,60,85,65,55],
+  ia: [65,85,80,65,70,80],
+  ges:[80,60,75,55,75,55]
+};
+var FATOR_ESTAGIO = {val:0.8, ope:0.9, tra:1, esc:1.05};
+
+var RELEV = {
+  inv:{ est:"Investidores perguntam onde o capital será aplicado. Um roteiro de tecnologia ligado às metas responde a isso.",
+        col:"A diligência pede histórico de clientes, receita e uso. O que não foi registrado não pode ser demonstrado.",
+        qua:"Números que mudam conforme quem calcula derrubam a credibilidade durante a diligência.",
+        aut:"Relatórios para investidores viram rotina mensal. Montá-los à mão consome o tempo dos sócios.",
+        ana:"Métricas como crescimento, retenção e custo de aquisição precisam estar à mão e com série histórica.",
+        pes:"Alguém precisa responder com rapidez às perguntas de dados que surgem durante a rodada." },
+  ven:{ est:"Sem critério para escolher onde investir, o orçamento de crescimento se dispersa entre ferramentas e canais.",
+        col:"Vender e reter mais exige saber quem compra, por onde chega e como usa o produto.",
+        qua:"Cadastros duplicados e definições diferentes de cliente ativo distorcem o funil e a retenção.",
+        aut:"Contatos de acompanhamento, cobranças e comunicações automáticas liberam a equipe comercial para vender.",
+        ana:"Funil, coortes e segmentação mostram onde os clientes se perdem e onde vale insistir.",
+        pes:"A equipe comercial precisa conseguir consultar os próprios números sem depender de terceiros." },
+  esc:{ est:"Escalar exige escolher o que automatizar primeiro. Sem planejamento, cada área resolve do seu jeito.",
+        col:"Integrações manuais entre ferramentas são o primeiro gargalo quando o volume cresce.",
+        qua:"Com mais volume, os erros de dados se multiplicam e a conferência manual deixa de dar conta.",
+        aut:"É o eixo que define se a operação cresce com a mesma equipe ou exige contratações a cada novo cliente.",
+        ana:"Indicadores operacionais mostram onde estão os gargalos antes que virem atraso para o cliente.",
+        pes:"Automações precisam de quem as mantenha. Depender de uma única pessoa vira risco operacional." },
+  efi:{ est:"Verificar o retorno de cada investimento evita pagar por ferramentas que ninguém usa.",
+        col:"Dados espalhados obrigam a retrabalho: a mesma informação é digitada e conferida várias vezes.",
+        qua:"Erros de dados geram retrabalho e decisões refeitas, um custo que não aparece no orçamento.",
+        aut:"Horas gastas copiando e conferindo planilhas são o custo mais direto que este diagnóstico consegue medir.",
+        ana:"Só se corta custo com segurança quando se sabe onde ele está e o que ele sustenta.",
+        pes:"Capacitar a equipe em análise básica sai mais barato do que terceirizar cada pergunta." },
+  ia:{  est:"Projetos de IA sem resultado esperado definido tendem a ficar em piloto permanente.",
+        col:"Modelos dependem de dados coletados com histórico e reunidos em um só lugar. É a base da pirâmide.",
+        qua:"Um modelo treinado com dados inconsistentes reproduz a inconsistência em escala.",
+        aut:"Funcionalidades com dados exigem fluxos que rodem sozinhos e avisem quando falham.",
+        ana:"Antes de prever, é preciso descrever e explicar. A análise diagnóstica valida se o caso de uso faz sentido.",
+        pes:"Construir e manter um produto de dados exige competência técnica interna ou um parceiro estável." },
+  ges:{ est:"Previsibilidade começa por prioridades revisadas em ciclos, com resultado esperado para cada iniciativa.",
+        col:"Sem registro consistente de vendas e finanças, qualquer projeção parte de estimativas.",
+        qua:"Indicadores com definição única evitam reuniões gastas discutindo qual número está certo.",
+        aut:"Relatórios que se atualizam sozinhos garantem que a gestão olhe os números sempre com a mesma frequência.",
+        ana:"Painéis usados em rituais de decisão transformam os números em rotina de gestão.",
+        pes:"A gestão por indicadores não pode depender de uma única pessoa que sabe montar as planilhas." }
+};
+
+var NIVEIS = [
+  {min:75, nome:"Orientado por dados", texto:"Os dados sustentam as decisões do dia a dia e a base permite avançar para análises preditivas e IA."},
+  {min:50, nome:"Gerenciado", texto:"Os dados principais são confiáveis e usados com regularidade. O desafio passa a ser integrar e automatizar."},
+  {min:25, nome:"Em estruturação", texto:"Há registros e iniciativas, ainda isolados e dependentes de trabalho manual e de pessoas específicas."},
+  {min:0,  nome:"Inicial", texto:"Os dados existem, mas estão dispersos, e as decisões se apoiam principalmente na experiência dos sócios."}
+];
+
+/* ---------------------------------------------------------------
+   Cálculo
+   --------------------------------------------------------------- */
+function notasDe(resp){
+  var notas = {};
+  EIXOS.forEach(function(e){
+    var soma = e.perguntas.reduce(function(t,p){ return t + Number(resp[p.id]); }, 0);
+    notas[e.id] = Math.round(soma / (e.perguntas.length * 3) * 100);
+  });
+  return notas;
+}
+function analisar(notas, objetivo, estagio){
+  var fator = FATOR_ESTAGIO[estagio] || 1, nec = {}, dist = {}, somaN = 0, somaC = 0;
+  EIXOS.forEach(function(e, i){
+    nec[e.id] = Math.min(95, Math.round(PERFIL[objetivo][i] * fator / 5) * 5);
+    dist[e.id] = Math.max(0, nec[e.id] - notas[e.id]);
+    somaN += notas[e.id];
+    somaC += Math.min(1, notas[e.id] / nec[e.id]);
+  });
+  var ordemBase = ["col","qua","est","pes","aut","ana"];
+  var rank = EIXOS.map(function(e){
+    var base = (e.id === "col" || e.id === "qua") && notas[e.id] < 40;
+    return { id:e.id, base:base, dist:dist[e.id], peso:dist[e.id] + (base ? 15 : 0) };
+  }).sort(function(a,b){
+    return (b.peso - a.peso) || (notas[a.id] - notas[b.id]) || (ordemBase.indexOf(a.id) - ordemBase.indexOf(b.id));
+  });
+  var geral = Math.round(somaN / EIXOS.length);
+  var nivel = NIVEIS.filter(function(n){ return geral >= n.min; })[0];
+  return { notas:notas, nec:nec, dist:dist, geral:geral, nivel:nivel,
+           cobertura:Math.round(somaC / EIXOS.length * 100), prioridades:rank.slice(0,3) };
+}
+function eixo(id){ return EIXOS.filter(function(e){ return e.id === id; })[0]; }
+function acaoDe(p, nivel){
+  if (nivel >= 3) return null;
+  return p.acoes.length === 3 ? p.acoes[nivel] : p.acoes[nivel <= 1 ? 0 : 1];
+}
+
+/* ---------------------------------------------------------------
+   Radar (SVG)
+   --------------------------------------------------------------- */
+var RD = {W:500, H:365, cx:250, cy:185, R:118};
+function ponto(i, v){
+  var a = (-90 + i * 60) * Math.PI / 180, r = RD.R * v / 100;
+  return [RD.cx + r * Math.cos(a), RD.cy + r * Math.sin(a)];
+}
+function poligono(vals){ return vals.map(function(v,i){ var p = ponto(i,v); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
+function radarSVG(notas, nec){
+  var vH = EIXOS.map(function(e){ return notas[e.id]; }), vN = EIXOS.map(function(e){ return nec[e.id]; });
+  var s = "";
+  [25,50,75,100].forEach(function(n){
+    s += '<polygon class="r-grade" points="' + poligono([n,n,n,n,n,n]) + '"/>';
+    s += '<text class="r-esc" x="' + (RD.cx + 4) + '" y="' + (RD.cy - RD.R * n / 100 + 11) + '">' + n + '</text>';
+  });
+  EIXOS.forEach(function(e, i){
+    var p = ponto(i, 100);
+    s += '<line class="r-eixo" x1="' + RD.cx + '" y1="' + RD.cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '"/>';
+    var a = (-90 + i * 60) * Math.PI / 180, cos = Math.cos(a), sin = Math.sin(a);
+    var x = RD.cx + (RD.R + 16) * cos, y = RD.cy + (RD.R + 16) * sin;
+    var anc = cos > 0.3 ? "start" : (cos < -0.3 ? "end" : "middle");
+    var y1 = sin < -0.9 ? y - 18 : (sin > 0.9 ? y + 12 : y - 3);
+    s += '<text class="r-rot" text-anchor="' + anc + '"><tspan x="' + x.toFixed(1) + '" y="' + y1.toFixed(1) + '">' + e.rot[0] + '</tspan><tspan x="' + x.toFixed(1) + '" y="' + (y1 + 17).toFixed(1) + '">' + e.rot[1] + '</tspan></text>';
+  });
+  s += '<polygon class="r-nec" points="' + poligono(vN) + '"/>';
+  s += '<polygon class="r-hoje" points="' + poligono(vH) + '"/>';
+  vH.forEach(function(v,i){ var p = ponto(i,v); s += '<circle class="r-ponto" r="3.5" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '"/>'; });
+  var desc = "Gráfico de radar. " + EIXOS.map(function(e){ return e.nome + ": " + notas[e.id] + " hoje, " + nec[e.id] + " necessário"; }).join("; ") + ".";
+  return '<svg class="radar" viewBox="0 0 ' + RD.W + ' ' + RD.H + '" role="img" aria-label="' + esc(desc) + '">' + s + '</svg>';
+}
+
+/* ---------------------------------------------------------------
+   Estado e armazenamento local (somente neste navegador)
+   --------------------------------------------------------------- */
+var CHAVE = "criterio.diagnostico.v1";
+var estado = { resp:{}, etapa:0, concluido:false };
+function carregar(){
+  try {
+    var bruto = window.localStorage.getItem(CHAVE);
+    if (bruto) { var d = JSON.parse(bruto); if (d && typeof d.resp === "object") { estado.resp = d.resp || {}; estado.etapa = d.etapa || 0; estado.concluido = !!d.concluido; } }
+  } catch (e) { /* sem armazenamento: segue em memória */ }
+}
+function salvar(){
+  try { window.localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) { /* ignora */ }
+}
+
+/* ---------------------------------------------------------------
+   Home: lista de eixos e demonstração
+   --------------------------------------------------------------- */
+function montarHome(){
+  $("#lista-eixos").innerHTML = EIXOS.map(function(e){ return "<div><dt>" + e.nome + "</dt><dd>" + e.desc + "</dd></div>"; }).join("");
+  $("#demo-chips").innerHTML = CONTEXTO.objetivo.opcoes.map(function(o){
+    return '<button type="button" class="chip" data-obj="' + o[0] + '" aria-pressed="false">' + ROT_DEMO[o[0]] + '</button>';
+  }).join("");
+  $("#demo-chips").addEventListener("click", function(ev){
+    var b = ev.target.closest("[data-obj]"); if (!b) return;
+    demoObj = b.getAttribute("data-obj"); atualizarDemo(true);
+  });
+  atualizarDemo(false);
+}
+var DEMO = {est:45, col:40, qua:30, aut:35, ana:50, pes:40};
+var demoObj = "inv", demoAtual = null, demoAnim = 0;
+function atualizarDemo(animar){
+  var a = analisar(DEMO, demoObj, "tra");
+  var alvo = EIXOS.map(function(e){ return a.nec[e.id]; });
+  Array.prototype.forEach.call(document.querySelectorAll("#demo-chips .chip"), function(c){
+    c.setAttribute("aria-pressed", c.getAttribute("data-obj") === demoObj ? "true" : "false");
+  });
+  $("#demo-lista").innerHTML = a.prioridades.map(function(p){
+    return "<li><strong>" + eixo(p.id).nome + "</strong>: " + a.notas[p.id] + " hoje, " + a.nec[p.id] + " necessários</li>";
+  }).join("");
+  var caixa = $("#demo-radar");
+  var semMov = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!animar || !demoAtual || semMov || !window.requestAnimationFrame) {
+    caixa.innerHTML = radarSVG(DEMO, a.nec); demoAtual = alvo; return;
+  }
+  var de = demoAtual.slice(), pol = $(".r-nec", caixa), ini = null, id = ++demoAnim;
+  caixa.querySelector("svg").setAttribute("aria-label", "Gráfico de radar de exemplo para o objetivo " + ROT_OBJ[demoObj]);
+  function passo(t){
+    if (id !== demoAnim) return;
+    if (ini === null) ini = t;
+    var k = Math.min(1, (t - ini) / 380); k = 1 - Math.pow(1 - k, 3);
+    var agora = de.map(function(v,i){ return v + (alvo[i] - v) * k; });
+    pol.setAttribute("points", poligono(agora));
+    demoAtual = agora;
+    if (k < 1) window.requestAnimationFrame(passo); else demoAtual = alvo;
+  }
+  window.requestAnimationFrame(passo);
+}
+
+/* ---------------------------------------------------------------
+   Formulário
+   --------------------------------------------------------------- */
+var ETAPAS = [
+  { titulo:"Sobre a startup", desc:"Três informações para situar o diagnóstico.", campos:["nome","estagio","equipe"] },
+  { titulo:"Objetivo e decisão em vista", desc:"O relatório compara a situação atual com o que este objetivo exige.", campos:["objetivo","decisao"] }
+].concat(EIXOS.map(function(e){
+  return { titulo:e.nome, desc:e.desc + " Marque a alternativa mais próxima da prática atual, não da intenção.",
+           campos:e.perguntas.map(function(p){ return p.id; }).concat(e.id === "aut" ? ["horas"] : []) };
+}));
+
+function campo(id){
+  if (CONTEXTO[id]) return CONTEXTO[id];
+  for (var i = 0; i < EIXOS.length; i++) for (var j = 0; j < EIXOS[i].perguntas.length; j++) {
+    var p = EIXOS[i].perguntas[j];
+    if (p.id === id) return { texto:p.texto, opcoes:p.opcoes.map(function(t, k){ return [String(k), t]; }) };
+  }
+  return null;
+}
+function htmlCampo(id){
+  var c = campo(id), v = estado.resp[id];
+  if (c.tipo === "texto") {
+    return '<div class="grupo" style="margin-top:34px"><label class="rotulo" for="c-' + id + '">' + c.texto + (c.dica ? " <small>(" + c.dica + ")</small>" : "") + '</label>' +
+           '<input class="campo-texto" id="c-' + id + '" data-campo="' + id + '" type="text" maxlength="60" autocomplete="organization" value="' + esc(v || "") + '"></div>';
+  }
+  return '<fieldset data-fs="' + id + '"><legend>' + c.texto + (c.dica ? " <small>(" + c.dica + ")</small>" : "") + '</legend><div class="opcoes">' +
+    c.opcoes.map(function(o){
+      return '<label class="opcao"><input type="radio" name="' + id + '" value="' + o[0] + '"' + (v === o[0] ? " checked" : "") + '><span class="bola" aria-hidden="true"></span><span>' + o[1] + '</span></label>';
+    }).join("") + '</div></fieldset>';
+}
+function montarEtapa(focar){
+  var i = estado.etapa, e = ETAPAS[i];
+  $("#prog-txt").textContent = "Etapa " + (i + 1) + " de " + ETAPAS.length;
+  $("#prog-barra").style.width = Math.round((i + 1) / ETAPAS.length * 100) + "%";
+  $("#t-diagnostico").textContent = e.titulo;
+  $("#etapa-desc").textContent = e.desc;
+  $("#etapa-campos").innerHTML = e.campos.map(htmlCampo).join("");
+  $("#form-aviso").textContent = "";
+  $("#btn-voltar").textContent = i === 0 ? "Voltar ao início" : "Voltar";
+  $("#btn-avancar").textContent = i === ETAPAS.length - 1 ? "Gerar relatório" : "Continuar";
+  $("#btn-limpar").hidden = !(i === 0 && Object.keys(estado.resp).length > 0);
+  if (focar) { window.scrollTo(0, 0); try { $("#t-diagnostico").focus({preventScroll:true}); } catch (x) {} }
+}
+function faltantes(i){
+  return ETAPAS[i].campos.filter(function(id){ var c = campo(id); return !c.opcional && c.tipo !== "texto" && (estado.resp[id] === undefined || estado.resp[id] === ""); });
+}
+function primeiraIncompleta(){
+  for (var i = 0; i < ETAPAS.length; i++) if (faltantes(i).length) return i;
+  return -1;
+}
+function ligarFormulario(){
+  $("#etapa-campos").addEventListener("change", function(ev){
+    var t = ev.target;
+    if (t.type === "radio") { estado.resp[t.name] = t.value; var fs = t.closest("fieldset"); if (fs) fs.classList.remove("faltando"); }
+    else if (t.getAttribute("data-campo")) { estado.resp[t.getAttribute("data-campo")] = t.value.trim(); }
+    estado.concluido = false; salvar();
+  });
+  $("#etapa-campos").addEventListener("input", function(ev){
+    var t = ev.target; if (t.getAttribute("data-campo")) { estado.resp[t.getAttribute("data-campo")] = t.value.trim(); }
+  });
+  $("#btn-avancar").addEventListener("click", function(){
+    var f = faltantes(estado.etapa);
+    if (f.length) {
+      f.forEach(function(id){ var fs = $('[data-fs="' + id + '"]'); if (fs) fs.classList.add("faltando"); });
+      $("#form-aviso").textContent = f.length === 1 ? "Falta responder a pergunta destacada." : "Faltam " + f.length + " perguntas, destacadas acima.";
+      var alvo = $('[data-fs="' + f[0] + '"]'); if (alvo && alvo.scrollIntoView) alvo.scrollIntoView({block:"center"});
+      return;
+    }
+    if (estado.etapa < ETAPAS.length - 1) { estado.etapa++; salvar(); montarEtapa(true); }
+    else { estado.concluido = true; salvar(); ir("relatorio"); }
+  });
+  $("#btn-voltar").addEventListener("click", function(){
+    if (estado.etapa === 0) { ir("inicio"); return; }
+    estado.etapa--; salvar(); montarEtapa(true);
+  });
+  $("#btn-limpar").addEventListener("click", function(){
+    estado = { resp:{}, etapa:0, concluido:false }; salvar(); montarEtapa(true);
+  });
+}
+
+/* ---------------------------------------------------------------
+   Relatório
+   --------------------------------------------------------------- */
+function leituraDecisao(dec, n){
+  switch (dec) {
+    case "pessoa":
+      if (n.est < 40) return "Antes de abrir a vaga, escrevam o que essa pessoa precisa entregar nos primeiros 90 dias. Com Estratégia e gestão em " + n.est + " pontos, a contratação corre o risco de virar um apoio genérico para urgências.";
+      if (n.col < 50 || n.qua < 50) return "Com a base de dados ainda em formação, o perfil que mais resolve é o generalista, capaz de organizar fontes e integrações. Um cientista de dados ou especialista em IA ficaria sem matéria-prima para trabalhar.";
+      return "A base atual comporta um perfil analítico. Definam as três perguntas de negócio que essa pessoa deve responder primeiro e usem essas perguntas no processo seletivo.";
+    case "ferramenta":
+      if (n.qua < 50 || n.col < 50) return "Uma nova ferramenta sobre dados dispersos ou inconsistentes exibe o problema mais depressa, mas não o resolve. Padronizem antes o registro e as definições dos indicadores que a ferramenta vai usar.";
+      if (n.est < 50) return "Comparem ao menos duas alternativas com os mesmos critérios (custo total, esforço de implantação e resultado esperado) e definam quem responde pela adoção. Ferramenta sem responsável costuma ser abandonada.";
+      return "A base permite aproveitar bem a ferramenta. Deem preferência à que se integra às fontes já existentes, para não criar mais um fluxo manual.";
+    case "consultoria":
+      if (n.pes < 40) return "Com pouca competência interna, o risco é a dependência: o trabalho é entregue e ninguém consegue mantê-lo. Incluam no contrato a documentação e o treinamento de uma pessoa da equipe.";
+      return "Definam o escopo pelas prioridades deste relatório e o resultado esperado em termos mensuráveis. Isso reduz o custo de comparar propostas e de avaliar a entrega.";
+    case "ia":
+      if (n.col < 50 || n.qua < 50) return "IA e automações dependem de dados registrados, reunidos e confiáveis. Com Coleta e infraestrutura em " + n.col + " e Qualidade e governança em " + n.qua + ", o retorno mais seguro está em automatizar regras simples e fortalecer a base antes de investir em modelos.";
+      return "A base atual sustenta um primeiro caso de uso. Escolham um com resultado mensurável e escopo pequeno, e definam antes como o ganho será verificado.";
+    case "infra":
+      if (n.est < 40) return "Antes de escolher banco ou arquitetura, listem as perguntas de negócio que a infraestrutura precisa responder. Sem isso, o projeto tende a crescer além do necessário para o estágio atual.";
+      return "Comecem pelo fluxo de dados mais crítico para o objetivo e ampliem a partir dele. Uma estrutura simples, que a equipe consegue manter, vale mais do que uma arquitetura completa sem responsável.";
+    default:
+      return "Não há uma decisão em avaliação no momento. As três prioridades acima podem servir de pauta para a próxima reunião de planejamento.";
+  }
+}
+function quemExecuta(n, equipe, horas){
+  var tit, txt;
+  var pequena = (equipe === "p" || equipe === "m");
+  if (n.pes < 40 && pequena) { tit = "Apoio externo pontual, com transferência de conhecimento";
+    txt = "Com o tamanho atual da equipe e a competência interna ainda em formação, uma contratação dedicada tende a custar mais do que a demanda justifica. O arranjo mais econômico é um apoio externo de escopo fechado para as duas primeiras prioridades, com a condição de documentar o trabalho e treinar alguém da equipe."; }
+  else if (n.pes < 40) { tit = "Contratação interna de um perfil generalista";
+    txt = "Em uma equipe desse tamanho a demanda por dados já é recorrente, o que justifica trazer a competência para dentro. Um perfil generalista, que organize fontes, integrações e painéis, resolve mais do que um especialista neste momento."; }
+  else if (n.pes < 70) { tit = "Execução interna, com apoio externo em pontos específicos";
+    txt = "A equipe tem base para conduzir as prioridades. Apoio externo faz sentido em tarefas pontuais e pouco específicas do negócio, como configurar uma integração ou revisar a arquitetura."; }
+  else { tit = "Execução interna";
+    txt = "A competência interna cobre as prioridades. O ganho está em reservar tempo da equipe para elas, em vez de contratar."; }
+  var extra = (horas === "11a20" || horas === "gt20") ? " O volume de trabalho manual informado indica uma necessidade frequente. Quanto mais frequente a demanda, mais vale manter a competência dentro da empresa." : "";
+  return { tit:tit, txt:txt + extra };
+}
+
+function montarRelatorio(){
+  var alvo = $("#relatorio-conteudo");
+  if (primeiraIncompleta() !== -1) {
+    alvo.innerHTML = '<div class="vazio"><h1 tabindex="-1" id="t-relatorio">O relatório ainda não foi gerado</h1><p>Ele é montado a partir das respostas do diagnóstico inicial, que leva cerca de 8 minutos.</p><a class="btn btn-pri" href="#diagnostico">Fazer o diagnóstico inicial</a></div>';
+    return;
+  }
+  var r = estado.resp, notas = notasDe(r), a = analisar(notas, r.objetivo, r.estagio);
+  var nome = (r.nome || "").trim(), nomeTxt = nome ? esc(nome) : "A startup";
+  var data = "";
+  try { data = new Date().toLocaleDateString("pt-BR", {day:"numeric", month:"long", year:"numeric"}); } catch (e) { data = ""; }
+  var ordenados = EIXOS.slice().sort(function(x,y){ return notas[y.id] - notas[x.id]; });
+  var forte = ordenados[0], fraco = ordenados[ordenados.length - 1];
+  var comDist = EIXOS.filter(function(e){ return a.dist[e.id] > 0; }).sort(function(x,y){ return a.dist[y.id] - a.dist[x.id]; });
+  var hs = HORAS[r.horas] || HORAS.ns;
+
+  var leitura = nomeTxt + " está no nível “" + a.nivel.nome + "”, com " + a.geral + " de 100 pontos. " + a.nivel.texto + " ";
+  leitura += forte.id === fraco.id || notas[forte.id] === notas[fraco.id]
+    ? "Os seis eixos têm notas parecidas, o que indica uma evolução uniforme."
+    : "O eixo mais desenvolvido é " + forte.nome + " (" + notas[forte.id] + ") e o que mais limita hoje é " + fraco.nome + " (" + notas[fraco.id] + ").";
+  var leitura2 = comDist.length
+    ? "Para " + FRASE_OBJ[r.objetivo] + ", a maior distância está em " + comDist[0].nome + ": " + notas[comDist[0].id] + " pontos hoje, " + a.nec[comDist[0].id] + " necessários. " + (comDist.length === 1 ? "Os demais eixos já atingem o patamar de referência." : (comDist.length === EIXOS.length ? "Todos os seis eixos estão abaixo do patamar que o objetivo pede." : "Ao todo, " + comDist.length + " dos seis eixos estão abaixo do patamar que o objetivo pede."))
+    : "Para " + FRASE_OBJ[r.objetivo] + ", todos os eixos já atingem o patamar de referência. As recomendações abaixo são de aperfeiçoamento.";
+
+  var linhas = EIXOS.map(function(e){
+    var d = a.dist[e.id];
+    return '<tr><th scope="row">' + e.nome + '</th><td class="num">' + notas[e.id] + '</td><td class="num">' + a.nec[e.id] + '</td><td class="num ' + (d ? "falta" : "ok") + '">' + (d ? d : "atingido") + '</td></tr>';
+  }).join("");
+
+  var prioridades = a.prioridades.map(function(p, i){
+    var e = eixo(p.id);
+    var pergs = e.perguntas.map(function(q){ return { q:q, nv:Number(r[q.id]) }; }).sort(function(x,y){ return x.nv - y.nv; });
+    var menor = pergs[0].nv;
+    var pesou = pergs.filter(function(x){ return x.nv <= Math.max(1, menor) && x.nv < 3; });
+    var passos = pergs.map(function(x){ return acaoDe(x.q, x.nv); }).filter(Boolean);
+    var porque = RELEV[r.objetivo][e.id];
+    if (p.base) porque += " Este eixo é a base dos demais: sem dados registrados e confiáveis, painéis, automações e modelos herdam o problema. Por isso ele ganha precedência enquanto estiver abaixo de 40 pontos.";
+    if (!p.dist) porque += " O eixo já atinge o patamar de referência; a recomendação aqui é de aperfeiçoamento.";
+    var h = '<li class="prioridade"><div class="p-num" aria-hidden="true">' + (i + 1) + '</div><div>' +
+      '<h3>' + e.nome + '</h3>' +
+      '<p class="p-notas">' + notas[e.id] + ' pontos hoje, ' + a.nec[e.id] + ' necessários para o objetivo' + (p.dist ? '. Distância: <b>' + p.dist + '</b>' : '') + '</p>' +
+      '<p class="porque">' + porque + '</p>';
+    if (pesou.length) h += '<p class="p-sub">O que pesou na nota</p><ul class="pesou">' + pesou.map(function(x){ return '<li><strong>' + x.q.rotulo + ':</strong> “' + x.q.opcoes[x.nv] + '”</li>'; }).join("") + '</ul>';
+    h += passos.length ? '<p class="p-sub">Primeiros passos</p><ul>' + passos.map(function(t){ return '<li>' + t + '</li>'; }).join("") + '</ul>'
+                       : '<p class="p-sub">Sem pendências neste eixo</p>';
+    return h + '</div></li>';
+  }).join("");
+
+  var atendidos = EIXOS.filter(function(e){ return a.dist[e.id] === 0; }).sort(function(x,y){ return notas[y.id] - notas[x.id]; });
+  var fortes = atendidos.length
+    ? "Já atingem o patamar que o objetivo pede: " + atendidos.map(function(e){ return e.nome + " (" + notas[e.id] + ")"; }).join(", ") + ". Esses eixos não precisam de investimento novo agora; basta manter as práticas atuais."
+    : "Nenhum eixo atinge ainda o patamar de referência para o objetivo. O mais próximo é " + EIXOS.slice().sort(function(x,y){ return a.dist[x.id] - a.dist[y.id]; })[0].nome + ", e vale preservar o que já funciona nele enquanto as prioridades avançam.";
+
+  var gov = quemExecuta(notas, r.equipe, r.horas);
+
+  alvo.innerHTML =
+    '<header class="rel-topo"><div><h1 tabindex="-1" id="t-relatorio">Diagnóstico de maturidade de dados</h1>' +
+      '<p class="sub">' + (nome ? esc(nome) + ". " : "") + 'Relatório inicial' + (data ? ", " + data : "") + '.</p></div>' +
+      '<div class="rel-acoes so-tela"><button class="btn btn-pri btn-peq" type="button" data-acao="baixar" hidden>Baixar relatório</button>' +
+      '<button class="btn btn-sec btn-peq" type="button" data-acao="rever">Rever respostas</button></div></header>' +
+    '<p class="msg so-tela" id="rel-msg" role="status"></p>' +
+    '<dl class="ficha"><div><dt>Estágio</dt><dd>' + ROT_ESTAGIO[r.estagio] + '</dd></div><div><dt>Equipe</dt><dd>' + ROT_EQUIPE[r.equipe] + '</dd></div>' +
+      '<div><dt>Objetivo em 12 meses</dt><dd>' + ROT_OBJ[r.objetivo] + '</dd></div><div><dt>Decisão em avaliação</dt><dd>' + esc(rotuloDecisao(r.decisao)) + '</dd></div></dl>' +
+
+    '<div class="numeros">' +
+      '<div><p class="rot">Maturidade geral</p><p class="val">' + a.geral + ' <small>de 100</small></p><p class="obs">Nível: ' + a.nivel.nome + '</p></div>' +
+      '<div><p class="rot">Cobertura do que o objetivo exige</p><p class="val">' + a.cobertura + '%</p><p class="obs">Média, entre os eixos, de quanto da nota necessária já foi atingido</p></div>' +
+      '<div><p class="rot">Trabalho manual com dados</p><p class="val" style="font-size:1.8rem">' + hs.val + '</p><p class="obs">' + hs.obs + '</p></div>' +
+    '</div>' +
+
+    '<section class="bloco"><h2>Onde a startup está e o que o objetivo pede</h2>' +
+      '<div class="radar-grid"><div>' + radarSVG(notas, a.nec) +
+        '<div class="legenda"><span><i class="leg-hoje"></i>Hoje</span><span><i class="leg-nec"></i>Necessário para o objetivo</span></div></div>' +
+      '<div class="rolagem"><table><thead><tr><th scope="col">Eixo</th><th scope="col" class="num">Hoje</th><th scope="col" class="num">Necessário</th><th scope="col" class="num">Distância</th></tr></thead><tbody>' + linhas + '</tbody></table></div></div>' +
+    '</section>' +
+
+    '<section class="bloco"><h2>Leitura geral</h2><p>' + leitura + '</p><p>' + leitura2 + '</p></section>' +
+
+    '<section class="bloco"><h2>Três prioridades para encurtar o caminho</h2><ol class="prioridades">' + prioridades + '</ol></section>' +
+
+    '<section class="bloco"><h2>Sobre a decisão em avaliação</h2><div class="caixa"><h3>' + esc(rotuloDecisao(r.decisao)) + '</h3><p>' + leituraDecisao(r.decisao, notas) + '</p></div></section>' +
+
+    '<section class="bloco"><h2>Quem executa: equipe interna ou apoio externo</h2><div class="caixa"><h3>' + gov.tit + '</h3><p>' + gov.txt + '</p>' +
+      '<p class="small">Critério usado: frequência da demanda e especificidade do conhecimento para o negócio, conforme a economia dos custos de transação (Williamson, 1981).</p></div></section>' +
+
+    '<section class="bloco"><h2>O que já funciona</h2><p>' + fortes + '</p></section>' +
+
+    '<section class="bloco"><details><summary>Como este relatório foi calculado</summary>' +
+      '<p>Cada pergunta dos seis eixos tem quatro alternativas, que descrevem práticas observáveis e valem de 0 a 3 pontos. A nota do eixo é a média das três perguntas, convertida para a escala de 0 a 100. A maturidade geral é a média simples dos eixos.</p>' +
+      '<p>O patamar necessário para cada objetivo é um parâmetro inicial desta versão de teste, definido pelos autores a partir da literatura de referência e ajustado pelo estágio da startup. Não é um benchmark de mercado e será calibrado com entrevistas e com os primeiros diagnósticos.</p>' +
+      '<p>As prioridades são os eixos com maior distância entre a nota atual e o patamar necessário. Coleta e infraestrutura e Qualidade e governança ganham precedência quando estão abaixo de 40 pontos, porque sustentam os demais eixos.</p>' +
+      '<p>As respostas são autodeclaradas. O diagnóstico completo confronta essas respostas com as fontes de dados e as ferramentas em uso.</p></details></section>' +
+
+    '<div class="final"><span class="selo">Em breve</span><h2>Diagnóstico completo</h2>' +
+      '<p>A próxima etapa aprofunda este relatório com entrevistas, análise das fontes de dados reais e um plano de 90 dias com responsáveis e resultado esperado para cada prioridade.</p></div>';
+
+  atualizarBaixar();
+}
+function rotuloDecisao(v){
+  var o = CONTEXTO.decisao.opcoes.filter(function(x){ return x[0] === v; })[0];
+  return o ? o[1] : "";
+}
+
+/* Download do relatório (capacidade opcional do ambiente) */
+var downloads = null;
+function atualizarBaixar(){
+  var b = $('[data-acao="baixar"]'); if (b) b.hidden = !downloads;
+}
+function htmlExportavel(){
+  var css = document.querySelector("style").textContent;
+  var corpo = $("#relatorio-conteudo").innerHTML;
+  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Diagnóstico de maturidade de dados</title>' +
+    '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">' +
+    '<style>' + css + '</style></head><body class="exportado"><div class="container rel-wrap"><article class="relatorio">' + corpo + '</article></div></body></html>';
+}
+function ligarRelatorio(){
+  $("#relatorio-conteudo").addEventListener("click", function(ev){
+    var b = ev.target.closest("[data-acao]"); if (!b) return;
+    var acao = b.getAttribute("data-acao");
+    if (acao === "rever") { estado.etapa = 0; salvar(); ir("diagnostico"); }
+    if (acao === "baixar" && downloads) {
+      var msg = $("#rel-msg");
+      var nome = (estado.resp.nome || "startup").toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "startup";
+      downloads.save({ filename:"diagnostico-" + nome + ".html", data:htmlExportavel() }).then(function(){
+        if (msg) msg.textContent = "Relatório salvo.";
+      }).catch(function(e){
+        var cod = e && e.code;
+        if (cod === "declined") { if (msg) msg.textContent = ""; }
+        else if (cod === "rate_limited") { if (msg) msg.textContent = "Há um pedido de download em aberto. Aguarde um instante e tente de novo."; }
+        else { if (msg) msg.textContent = "O download não está disponível nesta visualização."; b.hidden = true; }
+      });
+    }
+  });
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then(function(d){ downloads = d || null; atualizarBaixar(); }).catch(function(){ downloads = null; });
+  }
+}
+
+/* ---------------------------------------------------------------
+   Navegação entre telas
+   --------------------------------------------------------------- */
+var telaAtual = null;
+function mostrar(tela){
+  var mudou = tela !== telaAtual;
+  telaAtual = tela;
+  ["inicio","diagnostico","relatorio"].forEach(function(t){ $("#v-" + t).hidden = (t !== tela); });
+  document.body.setAttribute("data-view", tela);
+  if (tela === "diagnostico") { if (estado.etapa >= ETAPAS.length) estado.etapa = 0; montarEtapa(false); }
+  if (tela === "relatorio") montarRelatorio();
+  if (mudou) {
+    window.scrollTo(0, 0);
+    var t = $("#t-" + tela); if (t) { try { t.focus({preventScroll:true}); } catch (x) {} }
+  }
+  return mudou;
+}
+function ir(tela){
+  if (location.hash.replace("#","") !== tela) { try { location.hash = tela; } catch (e) {} }
+  mostrar(tela);
+}
+function rota(){
+  var h = location.hash.replace("#","");
+  if (h === "diagnostico" || h === "relatorio") { mostrar(h); return; }
+  mostrar("inicio");
+  if (h && h !== "inicio") { var el = document.getElementById(h); if (el && el.scrollIntoView) el.scrollIntoView(); }
+}
+
+carregar();
+montarHome();
+ligarFormulario();
+ligarRelatorio();
+window.addEventListener("hashchange", rota);
+rota();
+
+})();
+</script>
+</body>
+</html>
